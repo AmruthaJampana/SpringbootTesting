@@ -2,12 +2,10 @@ package org.example.controller;
 
 
 import lombok.AllArgsConstructor;
+import org.bson.types.ObjectId;
 import org.example.model.Car;
 import org.example.service.CarService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +23,16 @@ public class CarController {
     public List<Car> find(){
 
         return carService.get();
+    }
+     @PutMapping("/car/{id}")
+    public Car put(@RequestBody Car car , @PathVariable("id") String id) {
+
+        return carService.put( car , id);
+
+    }
+    @GetMapping("/car/{id}")
+    public Car getById(@PathVariable("id") String id){
+        return carService.get(id);
     }
 
 }
